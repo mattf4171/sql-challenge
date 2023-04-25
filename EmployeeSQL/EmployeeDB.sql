@@ -1,15 +1,22 @@
 -- Data Engineering
 
-drop table if exists Departments;
-drop table if exists Employees;
+
 drop table if exists Dept_emp;
 drop table if exists Dept_manager;
 drop table if exists Salaries;
+drop table if exists Employees;
 drop table if exists Titles;
+drop table if exists Departments;
 
 create table Departments (
 	dept_no varchar(4) not null primary key,
 	dept_name varchar(25) not null
+);
+
+create table Titles (
+	title_id varchar(5) primary key,
+	title varchar(25)
+-- 	foreign key (emp_title_id) references Titles(title_id)
 );
 
 create table Employees (
@@ -19,7 +26,8 @@ create table Employees (
 	first_name varchar(25) not null,
 	last_name varchar(25) not null,
 	sex varchar(1) not null,
-	hire_date date not null
+	hire_date date not null,
+	foreign key (emp_title_id) references Titles(title_id)
 );
 
 create table Dept_emp (
@@ -42,11 +50,6 @@ create table Salaries (
 	foreign key (emp_no) references Employees(emp_no)
 );
 
-create table Titles (
-	emp_title_id varchar(5) not null,
-	title varchar(25) not null,
-	foreign key (emp_title_id) references Employees(emp_title_id)
-);
 
 -- Data Analysis
 
